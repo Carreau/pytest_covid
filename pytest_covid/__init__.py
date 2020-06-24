@@ -4,8 +4,9 @@ Too many faillure, less tests.
 import sys
 import pytest
 import random
+from pluggy.callers import _Result
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 oh_no = False
 
@@ -17,11 +18,8 @@ class Covid:
     @pytest.hookimpl(hookwrapper=True)
     def pytest_pyfunc_call(self, pyfuncitem):
 
-        marks = list(pyfuncitem.iter_markers())
-        print("MARKS:", marks)
-
+        marks = list(pyfuncitem.iter_markers(name='contaminated'))
         outcome = yield
-
         failing = False
         try:
             res = outcome.get_result()  # will raise if outcome was exception
@@ -29,19 +27,19 @@ class Covid:
             failing = True
 
         if marks:
-            try:
-                raise ValueError("Testing positive to Covid 19")
-            except ValueError:
-                excinfo = sys.exc_info()
-                outcome._execinfo = excinfo
+            def testing():
+                raise ValueError("Testing positive to Covid 19, wear a mask next Time.")
+            f = _Result.from_call(testing)
+            outcome._excinfo = f._excinfo
+            outcome._result = f._result
             failing = True
 
         if failing:
             for test in pyfuncitem.session.items:
                 r = random.random()
-                if r < 0.005:
+                if r < 0.05:
                     test.add_marker(pytest.mark.contaminated)
-                elif r < 0.01:
+                elif r < 0.1:
                     test.add_marker(
                         pytest.mark.skipif(True, reason="to affraid to test")
                     )
