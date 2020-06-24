@@ -4,5 +4,10 @@ def test_fail():
 def test_fail_II():
     assert False
 
-def test_fail_III():
-    assert False
+
+import pytest
+import random
+
+@pytest.mark.parametrize('a', list(range(500)))
+def test_fail_III(a):
+    assert random.random() < 0.5
