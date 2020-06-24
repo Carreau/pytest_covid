@@ -1,0 +1,13 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "pytest_covid"
+author = "Matthias Bussonnier"
+author-email = "bussonniermatthias@gmail.com"
+home-page = "https://pypi.org/project/pytest_covid/"
+classifiers = ["License :: OSI Approved :: MIT License"]
+
+[tool.flit.entrypoints."pytest11"]
+pytest_covid = "pytest_covid"
