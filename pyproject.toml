@@ -7,14 +7,17 @@ module = "pytest_covid"
 author = "Matthias Bussonnier"
 author-email = "bussonniermatthias@gmail.com"
 home-page = "https://pypi.org/project/pytest_covid/"
-classifiers = ["License :: OSI Approved :: MIT License"]
 requires-python = ">=3.6"
 description-file="readme.md"
 classifiers=[
+    "License :: OSI Approved :: MIT License",
     "Intended Audience :: Developers",
     "Programming Language :: Python :: 3",
     "Framework :: Pytest",
 ]
+
+[tool.flit.metadata.urls]
+Source = "https://github.com/Carreau/pytest_covid"
 
 [tool.flit.entrypoints."pytest11"]
 pytest_covid = "pytest_covid"
