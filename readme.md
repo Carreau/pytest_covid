@@ -5,7 +5,7 @@
 > going to find more cases. So I said to my people, slow the testing down —
 > please.
 
-The more failures you'll get the more tests it will skip.
+The more failures you get, the more tests it will skip.
 
 ```
 # pytest.ini
@@ -20,9 +20,9 @@ Or if you like Fox News set `fake_news = True` and test failures will be reporte
 # test failure contamination
 
 For each test failure, 4% of the remaining tests will randomly fail (they get
-contaminated), and 1% skipped. Effect compounds, so contaminated test,
-contaminate mote tests and skip even more. Even with `fake_news=True` except
-Failing test _appear_ to be passing.
+contaminated), and 1% will be skipped. The effect compounds, so a contaminated test,
+will contaminate more tests and skip even more. Even with `fake_news=True`, except
+a failing test will _appear_ to be passing.
 
 
 # Example:
